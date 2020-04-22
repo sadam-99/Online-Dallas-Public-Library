@@ -1,0 +1,46 @@
+<%-include('../partials/header.html')%>
+    <link rel="stylesheet" href="/../../css/customer.css">
+    <title>Customer Home</title>
+    </head>
+
+    <body>
+
+        <%-include('partials/navbar.html')%>
+        <div class="container-fluid">
+            <div class="row">
+                <%-include('partials/sidebar.html')%>
+                <div class="col-md-10 content">
+                    <p class="display-2">Home</p>
+                    <div class="alert alert-primary" role="alert">
+                        Total books borrowed: <span style="float: right;"><%=tbbbc%></span>
+                    </div>
+                    <div class="alert alert-primary" role="alert">
+                        Books borrowed in last 7 days: <span style="float: right;">7</span>
+                    </div>
+                    <div class="alert alert-primary" role="alert">
+                        Books borrowed in last 30 days: <span style="float: right;">7</span>
+                        
+                    </div>
+					<br>
+                    <br>
+                    <br>
+                    <h2>Library News </h2>
+                    <ul>
+                        <li>The McDermott Library is Here to Help You Work and Learn Remotely</li>
+                        <li>Need help? Connect with a McDermott Librarian!</li>
+                        <li><a href="https://www.utdallas.edu/library/news/ut-dallas-library-coronavirus/"> McDermott Library Stepping Up Precautions in Response to Coronavirus </a> </li>
+                    </ul>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    Eugene McDermott Library<br>
+                    800 West Campbell Road<br>
+                    Richardson, TX 75080<br>
+                    PH: 972-883-2955
+                </div>
+            </div>
+            
+        </div>
+
+        <%-include('../partials/footer.html')%>
