@@ -1,2 +1,2 @@
-# Online-Dallas-Publiic-Library
-Online-Dallas-Publiic-Library
+# Online-Dallas-Public-Library
+Online-Dallas-Public-Library
