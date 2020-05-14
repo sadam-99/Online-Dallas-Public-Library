@@ -1,4 +1,18 @@
 /* admin/home.css */
+.bg-image {
+    background-image: url('../images/display.jpeg');
+
+  min-height: 100%;
+  min-width: 1024px;
+
+    /*min-height: 100vh;
+    min-width: 100vw;*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
 .navbar-nav {
     margin-right: 6rem;
 }
@@ -36,7 +50,6 @@
     position: relative;
     left: 16%;
 }
-
 
 /* admin/books.css */
 
@@ -76,10 +89,29 @@
 }
 
 .profile-pic {
-    width: 25rem;
+    width: 19rem;
+    height: 21rem;
+    /*object-fit: cover;*/
     padding-left: 2rem;
+    /*background-image: url("profile-pic.jpg");*/
 }
 
+.profile-pic-overlay {
+    position: absolute;
+    left: 100px;
+    width: 19rem;
+    height: 21rem;
+    background-size: cover;
+    object-fit: cover;
+    background-image: url("profile-pic.jpg");
+}
+
+.books_display
+{
+    width: 14rem;
+    height: 17rem;
+  object-fit: cover;
+}
 
 /* admin/books/add.css */
 

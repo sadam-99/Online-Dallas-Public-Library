@@ -6,13 +6,13 @@
     <body>
 
         <%-include('partials/navbar.html')%>
-        <div class="container-fluid">
+        <div class="container-fluid bg-image">
             <div class="row">
                 <%-include('partials/sidebar.html')%>
                 <div class="col-md-10 content">
                     <div class="row">
                         <div class="col-md-11 profile-content">
-                            <p class="display-4">Edit Profile</p>
+                            <p class="display-4"><b>Edit Profile</b></p>
                             <form class="" method="post">
                                 <input type="text" name="user_id" value="<%=res.user_id%>" hidden>
                                 <div class="form-group row">

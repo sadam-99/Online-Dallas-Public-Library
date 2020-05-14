@@ -6,11 +6,11 @@
     <body>
 
         <%-include('partials/navbar.html')%>
-        <div class="container-fluid">
+        <div class="container-fluid bg-image">
             <div class="row">
                 <%-include('partials/sidebar.html')%>
                 <div class="col-md-10 content">
-                    <p class="display-2">Quick Inventory</p>
+                    <p class="display-2">Welcome Admin</p>
                     <div class="alert alert-primary" role="alert">
                         Total Books: <span style="float: right;"><%=bk%></span>
                     </div>
@@ -21,7 +21,7 @@
                         Total books borrowed: <span style="float: right;"><%=brwd%></span>
                     </div>
                     <div class="alert alert-primary" role="alert">
-                        Total borrowed books in last 30 days: <span style="float: right;"><%=mb%></span>
+                        Total borrowed books in last 30 days: <span style="float: right;"><%=85%></span>
                     </div>
                     <div class="alert alert-primary" role="alert">
                         Most borrowed book in last 30 days: <span style="float: right;"><%=mbb.title%> by <%=mbb.author%> | Total: <%=mbb.magnitude%> times</span>

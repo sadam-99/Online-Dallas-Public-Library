@@ -4,7 +4,10 @@ var userModel = require.main.require('./models/userModel');
 var bookModel = require.main.require('./models/bookModel');
 var validationRules = require.main.require('./validation_rules/rules');
 var asyncValidator = require('async-validator-2');
-
+// var multer = require('multer');
+var ejs = require('ejs');
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
 router.get('/home', (req, res)=> {
     // var users = "";
     userModel.getAll((users)=> {
@@ -64,6 +67,38 @@ router.get('/profile', (req, res)=> {
             res.render('admin/profile', {res: result});
         }
     });
+});
+// Upoading the picture by browsing
+router.post('/profile', (req, res) => {
+    if (!req.files)
+        return res.status(400).send('No files were uploaded.');
+ 
+    var file = req.files.uploaded_image;
+ 
+    var id = req.body.user_id;
+    
+    var img_name= id + "_" + file.name;
+
+
+    if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"||file.mimetype == "image/gif" ){                  
+        file.mv('images/uploads/admin/'+img_name, function(err) {
+        })
+    }
+        console.log("Going into pic");
+        if (req.body.uploadButton == "picname")
+        {
+             userModel.profilePicture(id, img_name, (result)=> {
+                console.log("Inside pic");
+                console.log(result);
+                 if(!result){
+                   res.send("Invalid");
+                 }
+                else {
+                    console.log(img_name);
+                    res.render('admin/profile', {res: result });
+              }
+                });
+        } 
 });
 
 router.get('/profile/edit', (req, res)=> {
@@ -128,8 +163,10 @@ router.post('/changepass', (req, res)=> {
       newPassword: req.body.newPassword,
       confirmPassword: req.body.confirmPassword
     };
+    bcrypt.compare(req.body.oldPassword, req.body.password, (err, result1) => { 
+		if(!err){
 
-    if(req.body.password == req.body.oldPassword){
+    // if(req.body.password == req.body.oldPassword){
         validator.validate(data, (errors, fields)=> {
             if(!errors){
                 if(req.body.newPassword == req.body.confirmPassword){
@@ -155,6 +192,7 @@ router.post('/changepass', (req, res)=> {
     else {
         res.render('admin/change-password', {errs: [{message: "Your old passsword does not match!"}], res: [], success: []});
     }
+});
 
 });
 
@@ -250,7 +288,18 @@ router.get('/books/add', (req, res)=> {
     res.render('admin/books-add', {errs: [], success: [], data: []});
 });
 
+//  For adding the New Book
 router.post('/books/add', (req, res)=> {
+    if (!req.files)
+        return res.status(400).send('No files were uploaded.');
+    var file = req.files.uploaded_image;
+    var img_name= file.name;
+    console.log(img_name);
+    if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"||file.mimetype == "image/gif" ){                  
+        file.mv('images/books/'+img_name, function(err) {
+        })
+    }
+    console.log("Book added");
     var data = {
         genre: req.body.genre,
         title: req.body.title,
@@ -258,9 +307,11 @@ router.post('/books/add', (req, res)=> {
         publisher: req.body.publisher,
         edition: req.body.edition,
         isbn: req.body.isbn,
-        pages: req.body.pages
+        pages: req.body.pages,
+        copies: req.body.copies,
+        image: img_name
     };
-
+    console.log("hellooo ",data.image);
     var rules = validationRules.books.create;
     var validator = new asyncValidator(rules);
 
@@ -296,6 +347,12 @@ router.get('/books/edit/:id', (req, res)=> {
 });
 
 router.post('/books/edit/:id', (req, res)=> {
+    // if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"||file.mimetype == "image/jpg"||file.mimetype == "image/gif" ){                  
+    //     file.mv('images/books/'+img_name, function(err) {
+    //     })
+    // }
+    var file = req.files.uploaded_image;
+    var img_name= file.name;
     var data = {
         genre: req.body.genre,
         title: req.body.title,
@@ -303,9 +360,12 @@ router.post('/books/edit/:id', (req, res)=> {
         publisher: req.body.publisher,
         edition: req.body.edition,
         isbn: req.body.isbn,
-        pages: req.body.pages
+        pages: req.body.pages,
+        copies: req.body.copies, 
+        image: img_name
     };
     var book_id = req.body.book_id;
+    console.log("updated book Details", data);
 
     var rules = validationRules.books.create;
     var validator = new asyncValidator(rules);
@@ -317,7 +377,7 @@ router.post('/books/edit/:id', (req, res)=> {
                     res.send("Invalid");
                 }
                 else {
-                    console.log(result);
+                    // console.log(result);
                     res.render('admin/books-edit', {res: result, errs:[], success: [{message: "Book updated successfully!"}]});
                 }
             });
@@ -498,12 +558,12 @@ router.post('/books/:id/issue', (req, res)=> {
 });
 
 router.get('/books/issued', (req, res)=> {
-    bookModel.getAll((result)=> {
+    bookModel.getAllIssuedBooks((result)=> {
         if(!result){
             res.send("Invalid!");
         }
         else {
-            console.log(result);
+            console.log("Issued Books shown:", result);
             res.render('admin/issued-books', {res: result});
         }
     });
@@ -511,13 +571,18 @@ router.get('/books/issued', (req, res)=> {
 
 router.post('/books/issued', (req, res)=> {
     var book_id = req.body.book_id;
+    var user_id = req.body.user_id;
+    var issue_id = req.body.issue_id;
+    console.log("The Issue ID info to be Unissued by the Admin", issue_id, user_id, book_id);
     bookModel.unissueBook(book_id, (result)=> {
         if(!result){
             res.send("Invalid");
         }
         else {
-            console.log(result);
-            res.redirect('/admin/books');
+            console.log("The Book to be Unissued by the Admin", result);
+            // Redirect to the same page
+            // res.render('admin/issued-books', {res: result});
+            res.redirect('/admin/books/issued');
         }
     });
 });

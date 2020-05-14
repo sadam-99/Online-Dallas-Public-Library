@@ -6,14 +6,14 @@
     <body>
 
         <%-include('partials/navbar.html')%>
-            <div class="container-fluid">
+            <div class="container-fluid bg-image">
                 <div class="row">
                     <%-include('partials/sidebar.html')%>
                         <div class="col-md-10 content">
                             <form method="post">
                                 <div class="input-group mb-5 search-bar">
                                     <div class="input-group-prepend">
-                                        <label class="input-group-text" for="inputGroupSelect01">Search Books</label>
+                                        <label class="input-group-text" for="inputGroupSelect01"><b>Search Books</b></label>
                                     </div>
                                     <select class="custom-select dropbar" id="inputGroupSelect01" name="searchBy">
                                             <option selected>By...</option>

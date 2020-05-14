@@ -2,6 +2,9 @@
 var express = require('express');
 var expressSession = require('express-session');
 var bodyParser = require('body-parser');
+// app.engine('html', require('ejs').renderFile);
+var fileUpload = require('express-fileupload');
+var path = require('path');
 var app = express();
 var port = 3000;
 
@@ -25,6 +28,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(expressSession({secret: 'my top secret pass', resave: false, saveUninitialized: true}));
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/images', express.static(__dirname + '/images'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(fileUpload());
 
 app.use('*', function(req, res, next){
 

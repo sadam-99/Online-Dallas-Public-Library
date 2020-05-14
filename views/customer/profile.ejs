@@ -6,13 +6,13 @@
     <body>
 
         <%-include('partials/navbar.html')%>
-            <div class="container-fluid">
+            <div class="container-fluid bg-image">
                 <div class="row">
                     <%-include('partials/sidebar.html')%>
                         <div class="col-md-10 content">
                             <div class="row">
                                 <div class="col-md-6 profile-content">
-                                    <p class="display-4">Your Profile</p>
+                                    <p class="display-4"><b>Your Profile</b></p>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Name</label>
                                         <div class="col-sm-10">
@@ -54,9 +54,25 @@
 
                                 </div>
                                 <div class="col-md-5 profile-content">
-                                    <img class="profile-pic" src="../../images/profile-pic.jpg" alt="">
+                                    <!-- <img class="profile-pic" src="../../images/profile-pic.jpg" alt=""> -->
+                                    <h4>Profile Picture</h4>
+                                    <img class="profile-pic" src=" " alt= "">
+                                    <img class="profile-pic-overlay" src="../images/uploads/customer/<%=res.image%>" alt= "">
                                     <hr>
-                                    <a href="#">Change Profile Picture</a>
+                                    <%= typeof msg != 'undefined' ? msg : '' %>
+                                     <form method="POST" enctype="multipart/form-data">
+                                       <div class="file-field input-field">
+                                         <div class="btn grey">
+                                             </div>
+                                            </div> 
+                                             <input style="display:none;" type="input" name="user_id" value="<%=res.user_id%>"/>
+                                              <input class="form-control" type="file" name="uploaded_image" accept=""/>
+                                              <button type="submit" class="btn btn-secondary" value  = "picname" name="uploadButton">Upload</button>
+                                             </form>
+                                            <br>
+                                        <img src="<%= typeof file != 'undefined' ? file : '' %>" class="responsive-img">
+                                    <hr>
+                                    <!-- <a href="#">Change Profile Picture</a> -->
                                 </div>
                             </div>
                         </div>

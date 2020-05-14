@@ -1,0 +1,85 @@
+<%-include('../partials/header.html')%>
+    <link rel="stylesheet" href="/../../css/customer.css">
+    <title>Fine Payment</title>
+    </head>
+
+    <body>
+
+        <%-include('partials/navbar.html')%>
+            <div class="container-fluid bg-image">
+                <div class="row">
+                    <%-include('partials/sidebar.html')%>
+                        <div class="col-md-10 content">
+                            <p class="display-3" style="text-align:center"><b>Fine Payment</b></p>
+							<form class="" method="post">
+                            <table class="table table-striped table-light table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Book ID</th>
+                                        <th scope = "col"> Picture </th> 
+                                        <th scope="col">Genre</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Author</th>                                        
+                                        <th scope="col">Fine Amount(in $)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% var total_fine =0%>
+                                    <% for(var i=0; i< res.length; i++){ %>
+                                    <% var val =  res[i].fine_amt%>
+                                    <% var total_fine =  total_fine + res[i].fine_amt%>
+                                        <tr>
+                                            <th scope="row">
+                                                <%=res[i].book_id%>
+                                            </th>
+                                            <td>
+                                                <img class="books_display" src="../../images/books/<%=res[i].image%>" alt= "">
+                                           </td>
+                                            <td>
+                                                <%=res[i].genre%>
+                                            </td>
+                                            <td>
+                                                <%=res[i].title%>
+                                            </td>
+                                            <td>
+                                                <%=res[i].author%>
+                                            </td> 
+                                            <td>
+                                                <%=res[i].fine_amt%>
+                                            </td> 
+											<!-- <td> -->
+                                                <!-- <button type="button">Pay Fine id = "box"</button> -->
+												<!-- <input type="checkbox"  class="form-control" value = <%=val%> name = "box" > -->
+                                                 
+                                            <!-- </td> -->
+                                        </tr>
+                                        <% } %>
+                                        
+                                </tbody>
+                            </table>
+                            
+							<div>
+                                <div style="text-align: center;">
+                                <p style="font-weight: bold;">
+                                 Total Fine = <%=total_fine%> $ 
+                                 </p>
+                                    <button type="submit" class="btn btn-primary" value="total_fine" name="fine_txn" >Pay Total Fine</button>
+                                    <br>
+                                </div>
+                                </div>
+                        </div>
+						<div class="">
+                                    <% for(var i=0; i< errs.length; i++){ %>
+                                        <%= errs[i].message; %>
+                                        <br>
+                                    <% } %>
+                                    <% for(var i=0; i< success.length; i++){ %>
+                                        <%= success[i].message; %>
+                                        <br>
+                                    <% } %>
+                                </div>
+						</form>
+                </div>
+            </div>
+
+            <%-include('../partials/footer.html')%>

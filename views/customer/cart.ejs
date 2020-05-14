@@ -1,0 +1,78 @@
+<%-include('../partials/header.html')%>
+    <link rel="stylesheet" href="/../../css/customer.css">
+    <title>Return Books</title>
+    </head>
+
+    <body>
+
+        <%-include('partials/navbar.html')%>
+            <div class="container-fluid bg-image">
+                <div class="row">
+                    <%-include('partials/sidebar.html')%>
+                        <div class="col-md-10 content">
+                            <p class="display-3" style="text-align:center"> <b>CART</b> </p>
+							<form class="" method="post">
+                            <table class="table table-striped table-light table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope = "col"> Picture </th> 
+                                        <th scope="col">Genre</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Author</th>
+										<th scope="col">Select To Add or Remove</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(var i=0; i< res.length; i++){ %>
+									<% var val =   res[i].book_id  %>
+                                        <tr>
+                                            <th scope="row">
+                                                <%=res[i].book_id%>
+                                            </th>
+                                            <td>
+                                                <img class="books_display" src="../../images/books/<%=res[i].image%>" alt= "">
+                                           </td>
+                                            <td>
+                                                <%=res[i].genre%>
+                                            </td>
+                                            <td>
+                                                <%=res[i].title%>
+                                            </td>
+                                            <td>
+                                                <%=res[i].author%>
+                                            </td>
+                                            <td>
+                                              
+												<input type="checkbox"  class="form-control" value = <%=val%> name = "box" >
+                                                 
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
+							    <div>
+                                
+                                  <div style="text-align: center;">
+                                    <button type="submit" class="btn btn-primary" value="borrow" name="borrow">Checkout</button>
+                                    <button type="submit" class="btn btn-primary" value="remove_item" name="remove_item">Confirm Remove Books</button>
+                                </div>
+                                    <br>
+                                </div>
+                        </div>
+					      <div class="">
+                                    <% for(var i=0; i< errs.length; i++){ %>
+                                        <%= errs[i].message; %>
+                                        <br>
+                                    <% } %>
+                                    <% for(var i=0; i< success.length; i++){ %>
+                                        <%= success[i].message; %>
+                                        <br>
+                                    <% } %>
+                                </div>
+						</form>
+                </div>
+            </div>
+
+            <%-include('../partials/footer.html')%>

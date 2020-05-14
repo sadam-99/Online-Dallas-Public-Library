@@ -6,40 +6,39 @@
     <body>
 
         <%-include('partials/navbar.html')%>
-        <div class="container-fluid">
+        <div class="container-fluid bg-image">
             <div class="row">
                 <%-include('partials/sidebar.html')%>
                 <div class="col-md-10 content">
-                    <p class="display-2">Home</p>
+                    <p class="display-2"  style="text-align:center">Welcome <%=res_name[0].name%>!</p>
                     <div class="alert alert-primary" role="alert">
-                        Total books borrowed: <span style="float: right;"><%=tbbbc%></span>
+                        Total books borrowed: <span style="float: right;"><%=res.length%></span>
                     </div>
                     <div class="alert alert-primary" role="alert">
-                        Books borrowed in last 7 days: <span style="float: right;">7</span>
+                        Books borrowed in last 7 days: <span style="float: right;">26</span>
                     </div>
                     <div class="alert alert-primary" role="alert">
-                        Books borrowed in last 30 days: <span style="float: right;">7</span>
+                        Books borrowed in last 30 days: <span style="float: right;">38</span>
                         
                     </div>
-					<br>
                     <br>
-                    <br>
+                    <div class="alert alert-primary" role="alert">
                     <h2>Library News </h2>
                     <ul>
-                        <li>The McDermott Library is Here to Help You Work and Learn Remotely</li>
-                        <li>Need help? Connect with a McDermott Librarian!</li>
-                        <li><a href="https://www.utdallas.edu/library/news/ut-dallas-library-coronavirus/"> McDermott Library Stepping Up Precautions in Response to Coronavirus </a> </li>
+                        <li>The Dallas Public Library is Here to Help You Work and Learn Remotely</li>
+                        <li>Need help? Connect with a Dallas Public Librarian!</li>
+                        <li><a href="https://www.utdallas.edu/library/news/ut-dallas-library-coronavirus/"> Dallas Public Library Stepping Up Precautions in Response to Coronavirus </a> </li>
                     </ul>
+                </div>
                     <br>
-                    <br>
-                    <br>
-                    <br>
-                    Eugene McDermott Library<br>
+                    <div class="alert alert-primary" role="alert">
+                    <b>Dallas Public Library</b><br>
                     800 West Campbell Road<br>
                     Richardson, TX 75080<br>
                     PH: 972-883-2955
                 </div>
             </div>
+        </div>
             
         </div>
 
