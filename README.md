@@ -14,7 +14,8 @@ able to view all the books in the library (issued and currently available), add 
 delete books, edit books, add customers, remove customers.
 Only the admin can add/change the picture of the book added in the library portal.
 
-➔ Customer - a person who is registered on to
+➔ Customer - a person who is registered on to the public library portal and has the ability
+to view books, issue books and return books.
 
     While running in your PC, You have to change your own Password of MySQL WorkBench: in the ```config.js``` file in Line no. 5 which is in the """models""" Folder Provided
 
