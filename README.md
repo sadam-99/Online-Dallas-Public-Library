@@ -8,10 +8,12 @@ book is returned after the due date.
 Important Components of the System
 The main important actors in the domain are - Admin and Customers, which form the very basic
 foundation of the Public Library.
+
 ➔ Admin - a person who has additional access to features of the public library portal who is
 able to view all the books in the library (issued and currently available), add new books,
 delete books, edit books, add customers, remove customers.
 Only the admin can add/change the picture of the book added in the library portal.
+
 ➔ Customer - a person who is registered on to
 
     While running in your PC, You have to change your own Password of MySQL WorkBench: in the ```config.js``` file in Line no. 5 which is in the """models""" Folder Provided
